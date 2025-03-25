@@ -1,6 +1,4 @@
-# Save the README content to a markdown file
 
-readme_content = """
 # 🎬 Next.js Movie Explorer
 
 A **Next.js** web app that allows users to search movies via the **OMDb API**, view detailed information, and visualize data using charts.
