@@ -16,8 +16,9 @@ const breakpointColumnsObj = {
 };
 
 export default function MasonryList() {
-
-  const {selectedType, selectedYear,searchResults} =useMovieStore(state=>state)
+  const { selectedType, selectedYear, searchResults } = useMovieStore(
+    (state) => state
+  );
   const {
     data,
     isLoading,
@@ -28,18 +29,20 @@ export default function MasonryList() {
     isError,
     fetchNextPage,
   } = useGetMoviesInfinite({
-    search: searchResults || 'movie',
+    search: searchResults || "movie",
     year: selectedYear,
     type: selectedType,
-    page:1,
+    page: 1,
   });
-  const router =useRouter()
+  const router = useRouter();
 
   if (isLoading) {
     return (
       <p className="text-center mt-2 text-sm text-gray-500">Loading....</p>
     );
   }
+
+  console.log("ddd", data);
 
   const items =
     data?.dataMap.map((item, index) => (
@@ -77,6 +80,9 @@ export default function MasonryList() {
   }
   return (
     <div className="mt-4">
+      {items.length === 0 && (
+        <p className="text-center mt-2 text-sm text-gray-500">data notfound</p>
+      )}
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
