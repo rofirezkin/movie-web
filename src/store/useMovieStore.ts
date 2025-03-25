@@ -1,4 +1,5 @@
 
+import { MovieItem } from '@/services/api/get.movies.type';
 import {create} from 'zustand';
 
 interface MovieState {
