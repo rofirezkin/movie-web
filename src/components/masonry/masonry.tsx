@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetMoviesInfinite } from "@/services/query/query.get-movies";
+import { useMovieStore } from "@/store/useMovieStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -15,6 +16,8 @@ const breakpointColumnsObj = {
 };
 
 export default function MasonryList() {
+
+  const {selectedType, selectedYear,searchResults} =useMovieStore(state=>state)
   const {
     data,
     isLoading,
@@ -25,9 +28,10 @@ export default function MasonryList() {
     isError,
     fetchNextPage,
   } = useGetMoviesInfinite({
-    search: "movie",
-    year: null,
-    type: null,
+    search: searchResults || 'movie',
+    year: selectedYear,
+    type: selectedType,
+    page:1,
   });
   const router =useRouter()
 
