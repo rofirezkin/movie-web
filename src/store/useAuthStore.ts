@@ -1,5 +1,5 @@
-import {create} from 'zustand';
-import {persist, createJSONStorage} from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export type User = {
   username: string;
@@ -19,40 +19,40 @@ export type AuthStore = {
 
 export const useAuthStore = create<AuthStore>()(
   persist(
-    set => ({
-      token: '',
+    (set) => ({
+      token: "",
       user: null,
       isHydrated: false,
       setIsHydrate: (isHydrated: boolean) =>
-        set(state => ({
+        set((state) => ({
           ...state,
           isHydrated,
         })),
       setToken: (token: string) =>
-        set(state => ({
+        set((state) => ({
           ...state,
           token,
         })),
       setUser: (user: User | null) =>
-        set(state => ({
+        set((state) => ({
           ...state,
           user,
         })),
       reset: () =>
-        set(state => ({
+        set((state) => ({
           ...state,
-          token: '',
+          token: "",
           user: null,
         })),
     }),
     {
-      name: 'user-storage',
+      name: "user-storage",
       onRehydrateStorage: () => {
-        return state => {
-          console.log('Hydration complete. Setting isHydrate true...');
+        return (state) => {
+          console.log("Hydration complete. Setting isHydrate true...");
           state?.setIsHydrate(true);
         };
       },
-    },
-  ),
+    }
+  )
 );
