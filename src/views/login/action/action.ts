@@ -1,27 +1,24 @@
-'use server';
+"use server";
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
+export async function authenticate(prevState: unknown, formData: FormData) {
+  const email = formData.get("username") as string;
+  const password = formData.get("password") as string;
+  const cookie = await cookies();
 
-
-export async function authenticate(prevState: any, formData: FormData) {
-  const email = formData.get('username') as string;
-  const password = formData.get('password') as string;
-  const cookie = await cookies()
-
-
-  if (email === 'testing' && password === '!Testing123') {
-    cookie.set('token', 'dummy-jwt-token', {
+  if (email === "testing" && password === "!Testing123") {
+    cookie.set("token", "dummy-jwt-token", {
       httpOnly: true,
-      path: '/',
+      path: "/",
       secure: true,
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, 
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
     });
 
-    redirect('/');
+    redirect("/");
   }
 
-  return { error: 'Invalid username or password' };
+  return { error: "Invalid username or password" };
 }

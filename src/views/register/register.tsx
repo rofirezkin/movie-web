@@ -1,21 +1,28 @@
-'use client';
+"use client";
 
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
-  PhoneIcon
-} from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
 
-import { Button } from '@/components/button/button';
-import { authenticate } from '@/views/login/action/action';
+import { Button } from "@/components/button/button";
 
-import { Controller, useForm } from 'react-hook-form';
-import { useRegisterScreen } from './hooks/hooks.register-screen';
+import { Controller } from "react-hook-form";
+import { useRegisterScreen } from "./hooks/hooks.register-screen";
 
 export default function RegisterForm() {
-  const { control, errors, handleSubmit, onSubmit, isValid, reset, serverError, isSubmitting } = useRegisterScreen()
+  const {
+    control,
+    errors,
+    handleSubmit,
+    onSubmit,
+    isValid,
+    serverError,
+    isSubmitting,
+  } = useRegisterScreen();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
@@ -24,14 +31,17 @@ export default function RegisterForm() {
         <div className="w-full">
           {/* Username */}
           <div>
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900" htmlFor="username">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="username"
+            >
               Username
             </label>
             <div className="relative">
               <Controller
                 defaultValue=""
                 control={control}
-                name='username'
+                name="username"
                 render={({ field: { value, onChange } }) => (
                   <input
                     className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -45,12 +55,19 @@ export default function RegisterForm() {
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
-            {errors.username && <p className="text-sm text-red-500 mt-1">{errors.username.message}</p>}
+            {errors.username && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.username.message}
+              </p>
+            )}
           </div>
 
           {/* Email */}
           <div>
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900" htmlFor="email">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="email"
+            >
               Email
             </label>
             <div className="relative">
@@ -71,12 +88,19 @@ export default function RegisterForm() {
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
-            {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
+            {errors.email && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           {/* Phone Number */}
           <div>
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900" htmlFor="phone">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="phone"
+            >
               Phone Number
             </label>
             <div className="relative">
@@ -97,19 +121,26 @@ export default function RegisterForm() {
               />
               <PhoneIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
-            {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>}
+            {errors.phone && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.phone.message}
+              </p>
+            )}
           </div>
 
           {/* Password */}
           <div className="mt-4">
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900" htmlFor="password">
+            <label
+              className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+              htmlFor="password"
+            >
               Password
             </label>
             <div className="relative">
               <Controller
                 defaultValue=""
                 control={control}
-                name='password'
+                name="password"
                 render={({ field: { value, onChange } }) => (
                   <input
                     className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -123,15 +154,23 @@ export default function RegisterForm() {
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
-            {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-sm text-red-500 mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
         </div>
 
-        <RegisterButton pending={isSubmitting || !isValid } />
+        <RegisterButton pending={isSubmitting || !isValid} />
 
         {/* Server error */}
         {serverError && (
-          <div className="flex h-8 items-end space-x-1 mt-2" aria-live="polite" aria-atomic="true">
+          <div
+            className="flex h-8 items-end space-x-1 mt-2"
+            aria-live="polite"
+            aria-atomic="true"
+          >
             <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{serverError}</p>
           </div>

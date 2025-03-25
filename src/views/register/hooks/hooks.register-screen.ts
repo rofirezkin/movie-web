@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/store/useAuthStore";
 
 import { useCallback, useState } from "react";
-import { authenticate } from "../action/action";
+
 import { FormRegisterData, useFormRegister } from "./hooks.form-register";
 import { redirect } from "next/navigation";
 
@@ -13,18 +13,16 @@ export const useRegisterScreen = () => {
     reset,
     setError,
   } = useFormRegister();
-  const setUser = useAuthStore(state => state.setUser)
-  const [serverError, setServerError] = useState<string | null>(null);
+  const setUser = useAuthStore((state) => state.setUser);
+  const [serverError] = useState<string | null>(null);
 
   const onSubmit = useCallback(
-    ({username, email, phone}: FormRegisterData) => {
-      setUser({email, phone, username});
-      redirect('/login');
+    ({ username, email, phone }: FormRegisterData) => {
+      setUser({ email, phone, username });
+      redirect("/login");
     },
-    [setUser],
+    [setUser]
   );
-
-
 
   return {
     onSubmit,

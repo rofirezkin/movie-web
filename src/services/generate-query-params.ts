@@ -16,5 +16,5 @@ export function buildQueryParams(payload: MovieRequest): string {
     query.push(`type=${payload.type}`);
   }
 
-  return query.join('&'); // hasil: s=batman&page=2
+  return query.join("&"); // hasil: s=batman&page=2
 }

@@ -1,17 +1,15 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useMovieStore } from '@/store/useMovieStore';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'; // ✅ Heroicon
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useMovieStore } from "@/store/useMovieStore";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"; // ✅ Heroicon
 
 export default function SearchBar() {
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState("");
   const { setSearchResults } = useMovieStore();
 
   const handleSearch = () => {
     setSearchResults(searchKeyword);
-
   };
 
   return (
