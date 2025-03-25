@@ -2,6 +2,7 @@
 
 import { useGetMoviesInfinite } from "@/services/query/query.get-movies";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import React from "react";
 import Masonry from "react-masonry-css";
@@ -28,6 +29,7 @@ export default function MasonryList() {
     year: null,
     type: null,
   });
+  const router =useRouter()
 
   if (isLoading) {
     return (
@@ -38,6 +40,7 @@ export default function MasonryList() {
   const items =
     data?.dataMap.map((item, index) => (
       <div
+        onClick={() => router.push(`/detail/${item.id}`)}
         key={item.id || index}
         className="rounded overflow-hidden shadow-md bg-white p-2"
       >

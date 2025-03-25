@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryClientProvider } from "@/providers/query-client-provider";
+import { AuthInitializer } from "@/components/auth-initializer";
+import { use } from "react";
+import { getCurrentAuth } from "@/config/credentials";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,8 +26,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const {token} = use(getCurrentAuth())
+
   return (
     <html lang="en">
+      <AuthInitializer token={token} >
       <QueryClientProvider>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -32,6 +39,7 @@ export default function RootLayout({
           {children}
         </body>
       </QueryClientProvider>
+      </AuthInitializer>
     </html>
   );
 }

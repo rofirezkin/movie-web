@@ -1,4 +1,4 @@
-import { cn } from "@/app/utils/tailwind-merge-clsx";
+import { cn } from "@/utils/tailwind-merge-clsx";
 import { forwardRef, InputHTMLAttributes } from "react";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement>;

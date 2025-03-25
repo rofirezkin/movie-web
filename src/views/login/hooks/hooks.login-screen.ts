@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/store/useAuthStore";
 import { FormLoginData, useFormLogin } from "./hooks.form-login";
 import { useCallback, useState } from "react";
+import { authenticate } from "../action/action";
 
 export const useLoginScreen = () => {
   const { setToken } = useAuthStore.getState();
@@ -10,30 +11,37 @@ export const useLoginScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { isValid, errors },
+    formState: { isValid, errors, isSubmitting },
     reset,
     setError,
   } = useFormLogin();
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const onSubmit = useCallback(
-    ({ username, password }: FormLoginData) => {
-      if (username === "testing" && password === "!Testing123") {
-        setToken("jwt token");
-      } else {
-        console.log("testing");
-      }
-    },
-    [setToken]
-  );
+  const onSubmit = async (data: FormLoginData) => {
+    setServerError(null);
+
+    const formData = new FormData();
+    formData.append('username', data.username);
+    formData.append('password', data.password);
+
+    const result = await authenticate(undefined, formData);
+    if (result?.error) {
+      setServerError(result.error);
+    }
+  };
+
+
 
   return {
     isLoadingLogin,
     onSubmit,
     control,
     errors,
+    isSubmitting,
     isValid,
     handleSubmit,
     reset,
     setError,
+    serverError,
   };
 };

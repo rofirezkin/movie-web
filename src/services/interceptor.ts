@@ -2,15 +2,17 @@ import {useAuthStore} from '@/store/useAuthStore';
 import axios from 'axios';
 
 export const http = axios.create({
-  baseURL: 'http://www.omdbapi.com/?i=tt3896198&apikey=639928ce&',
+  baseURL: 'https://www.omdbapi.com/?apiKey=639928ce&',
 });
 
 http.interceptors.request.use(config => {
   const {token} = useAuthStore.getState();
 
-  if (token) {
-    config.headers.Authorization = token;
-  }
+  console.log('token ', token)
+
+  // if (token) {
+  //   config.headers.Authorization = `Bearer ${token}`;
+  // }
 
   return config;
 });

@@ -2,8 +2,9 @@
 
 import React, { useMemo } from "react";
 import { Carousel } from "antd";
-import { CarouselItem, useGetMovie } from "@/services/query/query.get-movies";
+
 import Image from "next/image";
+import { CarouselItem, useGetMovie } from "@/services/query/query.get-movies";
 
 const CarouselImage = () => {
   const { data, isLoading } = useGetMovie({

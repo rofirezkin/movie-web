@@ -1,15 +1,10 @@
-'use client'
 
-import dynamic from 'next/dynamic';
-
-
-
-const LoginForm = dynamic(
-    () => import("@/views/login/login"),
-    {
-      ssr: false,
-    }
-  );
+import LoginForm from '@/views/login/login';
+import RegisterForm from '@/views/register/register';
+import {Metadata} from 'next';
+export const metadata: Metadata = {
+	title: 'Register',
+};
 
 export default function LoginPage() {
 	return (
@@ -20,7 +15,7 @@ export default function LoginPage() {
 
 					</div>
 				</div>
-				<LoginForm />
+				<RegisterForm />
 			</div>
 		</main>
 	);
